@@ -203,17 +203,7 @@ dbl (4): id, weight, age, fat
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer in code</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/blood_fat.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 25 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): group
-dbl (4): id, weight, age, fat
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/blood_fat.csv"</span>,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 25 × 5
       id group weight   age   fat
@@ -243,32 +233,55 @@ dbl (4): id, weight, age, fat
 <blockquote class="blockquote">
 <p>Your answer as text</p>
 </blockquote>
+<p>rows 25 and col 5</p>
 <ul>
 <li>The columns of a tibble report their type:</li>
 </ul>
 <blockquote class="blockquote">
 <p>Your answer as text</p>
 </blockquote>
+<p>id :double ,group :character , weight : double , age: double , fat: double</p>
 <p>Actually, both <code>age</code> and <code>id</code> are <strong>integers</strong>, and should be read as such.</p>
 <section id="read-the-blood_fat.csv-specifying-the-data-types-of-age-and-id-as-integers" class="level3">
 <h3 class="anchored" data-anchor-id="read-the-blood_fat.csv-specifying-the-data-types-of-age-and-id-as-integers">Read the <code>blood_fat.csv</code> specifying the data types of <code>age</code> and <code>id</code> as integers</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/blood_fat.csv"</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">age=</span><span class="fu">col_integer</span>(),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">id=</span><span class="fu">col_integer</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 25 × 5
+      id group weight   age   fat
+   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+ 1     1 A         84    46  354.
+ 2     2 A         73    20  190.
+ 3     3 A         65    52  406.
+ 4     4 A         70    30  264.
+ 5     5 A         76    57  452.
+ 6     6 A         69    25  302.
+ 7     7 A         63    28  288.
+ 8     8 A         72    36  386.
+ 9     9 A         79    57  402.
+10    10 A         75    44  366.
+# ℹ 15 more rows</code></pre>
+</div>
+</div>
 </section>
 <section id="tip-1" class="level3">
 <h3 class="anchored" data-anchor-id="tip-1">Tip</h3>
 <p>In the <code>col_types = cols(....)</code> you can use the columns bare names and either the long description to call the specific data type like <code>col_integer()</code> or the shortcut <code>"i"</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer in code</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/blood_fat.csv"</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">group=</span><span class="fu">col_character</span>(),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">id=</span><span class="fu">col_double</span>(),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">weight=</span><span class="fu">col_double</span>(),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">age=</span><span class="fu">col_integer</span>(),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">fat=</span><span class="fu">col_double</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer in code</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/blood_fat.csv"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">group=</span><span class="fu">col_character</span>(),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">id=</span><span class="fu">col_integer</span>(),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">weight=</span><span class="fu">col_double</span>(),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">age=</span><span class="fu">col_integer</span>(),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">fat=</span><span class="fu">col_double</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 25 × 5
       id group weight   age   fat
-   &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
  1     1 A         84    46  354.
  2     2 A         73    20  190.
  3     3 A         65    52  406.
@@ -286,12 +299,12 @@ dbl (4): id, weight, age, fat
 <section id="read-the-blood_fat.csv-specifying-the-data-types-of-age-and-id-as-integers-skipping-weight." class="level3">
 <h3 class="anchored" data-anchor-id="read-the-blood_fat.csv-specifying-the-data-types-of-age-and-id-as-integers-skipping-weight.">Read the <code>blood_fat.csv</code> specifying the data types of <code>age</code> and <code>id</code> as integers, skipping <code>weight</code>.</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer in code</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/blood_fat.csv"</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">age=</span><span class="st">"i"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">id=</span><span class="st">"i"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">weight=</span><span class="st">"_"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer in code</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/blood_fat.csv"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">age=</span><span class="st">"i"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">id=</span><span class="st">"i"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">weight=</span><span class="st">"_"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 25 × 4
       id group   age   fat
