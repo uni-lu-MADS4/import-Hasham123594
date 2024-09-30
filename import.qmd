@@ -1,6 +1,6 @@
 ---
 title: "Import practical"
-author: Your name here
+author: Muhammad Hasham
 date: today
 format: html
 ---
@@ -29,6 +29,9 @@ We will take advantage of the RStudio projects and store data files in a sub-fol
 
 ```{r}
 # Your answer in code
+library(readr)
+
+
 
 ```
 
@@ -42,6 +45,7 @@ If you load the library only in the console and forget to place a chunk to load 
 
 
 ## Use `readr` to load your first file
+readr
 
 
 ### Load the `blood_fat` file
@@ -79,6 +83,8 @@ For example, you folder structure could be (depending on the picked names) as he
 ```{r}
 # Your answer in code
 
+readr::read_csv("data/blood_fat.csv")
+
 ```
 
 
@@ -92,6 +98,8 @@ If we are happy with the guessed delimiter and the column names / types, we coul
 
 ```{r}
 # Your answer in code
+
+readr::read_delim("data/blood_fat.csv")
 
 
 ```
@@ -108,6 +116,8 @@ If we are happy with the guessed delimiter and the column names / types, we coul
 
 > Your answer as text
 
+rows 25 and col 5
+
 
 
 - The columns of a tibble report their type:
@@ -116,6 +126,7 @@ If we are happy with the guessed delimiter and the column names / types, we coul
 
 > Your answer as text
 
+id :double ,group :character , weight : double , age: double , fat: double
 
 
 Actually, both `age` and `id` are **integers**, and should be read as such.
@@ -132,7 +143,12 @@ In the `col_types = cols(....)` you can use the columns bare names and either th
 ```{r}
 # Your answer in code
 
-
+readr::read_delim("data/blood_fat.csv",
+                  col_types = cols(group=col_character(),
+                                   id=col_double(),
+                                   weight=col_double(),
+                                   age=col_integer(),
+                                   fat=col_double()))
 
 ```
 
@@ -141,6 +157,11 @@ In the `col_types = cols(....)` you can use the columns bare names and either th
 
 ```{r}
 # Your answer in code
+
+readr::read_delim("data/blood_fat.csv",
+                  col_types = cols(age="i",
+                                    id="i",
+                                    weight="_"))
 
 
 
@@ -153,6 +174,7 @@ In the `col_types = cols(....)` you can use the columns bare names and either th
 You use the command 
 
 ```
+
 quarto render import.qmd
 ```
 
