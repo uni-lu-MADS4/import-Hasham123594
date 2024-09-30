@@ -99,7 +99,7 @@ If we are happy with the guessed delimiter and the column names / types, we coul
 ```{r}
 # Your answer in code
 
-readr::read_delim("data/blood_fat.csv")
+readr::read_delim("data/blood_fat.csv",show_col_types = FALSE)
 
 
 ```
@@ -133,6 +133,13 @@ Actually, both `age` and `id` are **integers**, and should be read as such.
 
 ### Read the `blood_fat.csv` specifying the data types of `age` and `id` as integers
 
+```{r}
+readr::read_csv("data/blood_fat.csv",
+                col_types = cols(age=col_integer(),
+                                 id=col_integer()))
+
+```
+
 
 ### Tip
 In the `col_types = cols(....)` you can use the columns bare names and either the long description
@@ -145,7 +152,7 @@ In the `col_types = cols(....)` you can use the columns bare names and either th
 
 readr::read_delim("data/blood_fat.csv",
                   col_types = cols(group=col_character(),
-                                   id=col_double(),
+                                   id=col_integer(),
                                    weight=col_double(),
                                    age=col_integer(),
                                    fat=col_double()))
